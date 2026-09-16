@@ -387,6 +387,181 @@ public sealed class DesktopUiTests
         Assert.IsFalse(monitorPage.IsDisposed);
     }
 
+    /// <summary>Checks a blank-origin release cannot reuse the native menu's preceding pressed item.</summary>
+    [TestMethod]
+    public void NavigationBlankMouseDownDoesNotReusePreviousClickAfterBack()
+    {
+        using var form = new OffscreenMainForm();
+        form.Show();
+        NavigationMenu menu = GetControl<NavigationMenu>(form, "_navigationMenu");
+        AntdUI.Panel contentPanel = GetControl<AntdUI.Panel>(form, "_contentPanel");
+        AntdUI.Button back = GetControl<AntdUI.Button>(form, "_backButton");
+        AntdUI.MenuItem devices = FindMenuItem(menu, "Devices");
+        InvokeMenuClick(menu, devices);
+        InvokeClick(back);
+        Assert.AreEqual("Dashboard", GetVisiblePage(contentPanel).Name);
+        Assert.IsFalse(back.Enabled);
+
+        Rectangle row = devices.Rect();
+        var down = new Point(row.Left - 1, row.Top + row.Height / 2);
+        var release = new Point(down.X + 2, down.Y);
+        Assert.IsNull(menu.HitTest(down.X, down.Y));
+        Assert.AreSame(devices, menu.HitTest(release.X, release.Y));
+        MethodInfo? mouseDown = typeof(NavigationMenu).GetMethod("OnMouseDown",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        MethodInfo? mouseUp = typeof(NavigationMenu).GetMethod("OnMouseUp",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        Assert.IsNotNull(mouseDown);
+        Assert.IsNotNull(mouseUp);
+        int selections = 0;
+        int releases = 0;
+        menu.ItemClick += (_, e) =>
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                selections++;
+            }
+        };
+        menu.MouseUp += (_, _) => releases++;
+
+        mouseDown.Invoke(menu, [new MouseEventArgs(MouseButtons.Left, 1, down.X, down.Y, 0)]);
+        InvokeMouseMove(menu, release);
+        mouseUp.Invoke(menu, [new MouseEventArgs(MouseButtons.Left, 1, release.X, release.Y, 0)]);
+
+        Assert.AreEqual("Dashboard", GetVisiblePage(contentPanel).Name);
+        Assert.IsFalse(back.Enabled, "A blank-origin gesture must not create navigation history.");
+        Assert.AreEqual(0, selections);
+        Assert.AreEqual(1, releases, "Cancelling navigation must preserve the normal mouse-up event.");
+        InvokeMenuClick(menu, devices);
+        Assert.AreEqual("Devices", GetVisiblePage(contentPanel).Name);
+        Assert.AreEqual(1, selections);
+        InvokeClick(back);
+        Assert.AreEqual("Dashboard", GetVisiblePage(contentPanel).Name);
+        Assert.IsFalse(back.Enabled);
+    }
+
+    /// <summary>Checks completed clicks clear their state without cancelling an in-progress leave and return.</summary>
+    [TestMethod]
+    public void NavigationMouseReleaseClearsGestureAndPreservesLeaveThenReturnClick()
+    {
+        using var form = new OffscreenMainForm();
+        form.Show();
+        NavigationMenu menu = GetControl<NavigationMenu>(form, "_navigationMenu");
+        AntdUI.Panel contentPanel = GetControl<AntdUI.Panel>(form, "_contentPanel");
+        AntdUI.Button back = GetControl<AntdUI.Button>(form, "_backButton");
+        AntdUI.MenuItem devices = FindMenuItem(menu, "Devices");
+        MethodInfo? mouseDown = typeof(NavigationMenu).GetMethod("OnMouseDown",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        MethodInfo? mouseUp = typeof(NavigationMenu).GetMethod("OnMouseUp",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        MethodInfo? mouseLeave = typeof(NavigationMenu).GetMethod("OnMouseLeave",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        Assert.IsNotNull(mouseDown);
+        Assert.IsNotNull(mouseUp);
+        Assert.IsNotNull(mouseLeave);
+        Rectangle row = devices.Rect();
+        var click = new MouseEventArgs(MouseButtons.Left, 1, row.Left + 1, row.Top + row.Height / 2, 0);
+
+        mouseDown.Invoke(menu, [click]);
+        mouseLeave.Invoke(menu, [EventArgs.Empty]);
+        InvokeMouseMove(menu, click.Location);
+        mouseUp.Invoke(menu, [click]);
+        Assert.AreEqual("Devices", GetVisiblePage(contentPanel).Name,
+            "Leaving and returning during a valid main-menu press must retain its original click behavior.");
+        InvokeClick(back);
+        Assert.AreEqual("Dashboard", GetVisiblePage(contentPanel).Name);
+        Assert.IsFalse(back.Enabled);
+
+        mouseUp.Invoke(menu, [click]);
+        Assert.AreEqual("Dashboard", GetVisiblePage(contentPanel).Name);
+        Assert.IsFalse(back.Enabled, "A second release without a new press must not reuse the completed gesture.");
+    }
+
+    /// <summary>Checks a blank-origin touch drag releases normally and retains native inertial scrolling.</summary>
+    [TestMethod]
+    public void NavigationBlankTouchDragPreservesInertiaAndReleasesGesture()
+    {
+        using var form = new OffscreenMainForm();
+        form.Show();
+        NavigationMenu menu = GetControl<NavigationMenu>(form, "_navigationMenu");
+        AntdUI.Panel contentPanel = GetControl<AntdUI.Panel>(form, "_contentPanel");
+        InvokeClick(GetControl<AntdUI.Button>(form, "_collapseButton"));
+        menu.Dock = DockStyle.None;
+        menu.Height = FindMenuItem(menu, "Devices").Rect().Height * 3;
+        Assert.IsTrue(menu.ScrollBar.ShowY);
+        Assert.IsTrue(Config.TouchEnabled);
+        int step = (int)(Config.TouchThreshold * menu.DeviceDpi / 96F) + 5;
+        int x = FindMenuItem(menu, "Devices").Rect().Left - 1;
+        int y = menu.ClientSize.Height - 5;
+        Assert.IsNull(menu.HitTest(x, y));
+        MethodInfo? mouseDown = typeof(NavigationMenu).GetMethod("OnMouseDown",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        MethodInfo? mouseUp = typeof(NavigationMenu).GetMethod("OnMouseUp",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        Assert.IsNotNull(mouseDown);
+        Assert.IsNotNull(mouseUp);
+        mouseDown.Invoke(menu, [new MouseEventArgs(MouseButtons.Left, 1, x, y, 0)]);
+        InvokeMouseMove(menu, new Point(x, y - step));
+        InvokeMouseMove(menu, new Point(x, y - step * 2));
+        int draggedOffset = menu.ScrollBar.ValueY;
+        Assert.IsGreaterThan(0, draggedOffset);
+        mouseUp.Invoke(menu, [new MouseEventArgs(MouseButtons.Left, 1, x, y - step * 2, 0)]);
+
+        var elapsed = System.Diagnostics.Stopwatch.StartNew();
+        while (menu.ScrollBar.ValueY == draggedOffset && elapsed.Elapsed < TimeSpan.FromSeconds(2))
+        {
+            Application.DoEvents();
+        }
+
+        Assert.IsGreaterThan(draggedOffset, menu.ScrollBar.ValueY,
+            "Releasing a blank-origin drag must still start the native inertia animation.");
+        Assert.AreEqual("Dashboard", GetVisiblePage(contentPanel).Name);
+        Assert.IsFalse(GetControl<AntdUI.Button>(form, "_backButton").Enabled);
+
+        // A new stationary gesture stops inertia, then its release must stop further pointer scrolling.
+        mouseDown.Invoke(menu, [new MouseEventArgs(MouseButtons.Left, 1, x, y, 0)]);
+        mouseUp.Invoke(menu, [new MouseEventArgs(MouseButtons.Left, 1, x, y, 0)]);
+        int releasedOffset = menu.ScrollBar.ValueY;
+        InvokeMouseMove(menu, new Point(x, y - step));
+        InvokeMouseMove(menu, new Point(x, y - step * 2));
+        Assert.AreEqual(releasedOffset, menu.ScrollBar.ValueY);
+    }
+
+    /// <summary>Checks mouse-up still releases a scrollbar drag before later pointer movement.</summary>
+    [TestMethod]
+    public void NavigationScrollbarMouseReleaseStopsDraggingWithoutNavigation()
+    {
+        using var form = new OffscreenMainForm();
+        form.Show();
+        NavigationMenu menu = GetControl<NavigationMenu>(form, "_navigationMenu");
+        AntdUI.Panel contentPanel = GetControl<AntdUI.Panel>(form, "_contentPanel");
+        InvokeClick(GetControl<AntdUI.Button>(form, "_collapseButton"));
+        menu.Dock = DockStyle.None;
+        menu.Height = FindMenuItem(menu, "Devices").Rect().Height * 3;
+        Assert.IsTrue(menu.ScrollBar.ShowY);
+        var drag = new Point(menu.ClientSize.Width - 1, menu.ClientSize.Height / 2);
+        Assert.IsTrue(menu.ScrollBar.Contains(drag));
+        MethodInfo? mouseDown = typeof(NavigationMenu).GetMethod("OnMouseDown",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        MethodInfo? mouseUp = typeof(NavigationMenu).GetMethod("OnMouseUp",
+            BindingFlags.Instance | BindingFlags.NonPublic);
+        Assert.IsNotNull(mouseDown);
+        Assert.IsNotNull(mouseUp);
+        mouseDown.Invoke(menu, [new MouseEventArgs(MouseButtons.Left, 1, drag.X, drag.Y, 0)]);
+        InvokeMouseMove(menu, new Point(drag.X, drag.Y + 10));
+        int draggedOffset = menu.ScrollBar.ValueY;
+        Assert.IsGreaterThan(0, draggedOffset);
+        mouseUp.Invoke(menu, [new MouseEventArgs(MouseButtons.Left, 1, drag.X, drag.Y + 10, 0)]);
+        InvokeMouseMove(menu, new Point(drag.X, 0));
+
+        Assert.AreEqual(draggedOffset, menu.ScrollBar.ValueY);
+        Assert.AreEqual("Dashboard", GetVisiblePage(contentPanel).Name);
+        Assert.IsFalse(GetControl<AntdUI.Button>(form, "_backButton").Enabled);
+        menu.ScrollBar.ValueY = 0;
+        InvokeMenuClick(menu, FindMenuItem(menu, "Devices"));
+        Assert.AreEqual("Devices", GetVisiblePage(contentPanel).Name);
+    }
+
     /// <summary>Checks that filtering changes visibility without destroying navigation or page state.</summary>
     [TestMethod]
     public void SearchChildMatchAndClearPreservesMenuInstancesAndCachedPages()
@@ -2415,6 +2590,53 @@ public sealed class DesktopUiTests
         Assert.IsFalse(form.ShowInTaskbar);
     }
 
+    /// <summary>Checks shell captures preserve the foreground navigation across languages, themes and sidebar states.</summary>
+    /// <param name="language">The application language shown in the navigation.</param>
+    /// <param name="dark">Whether to capture the dark palette.</param>
+    /// <param name="collapsed">Whether to capture the collapsed navigation rail.</param>
+    [TestMethod]
+    [TestCategory("Rendering")]
+    [DataRow("en-US", false, true)]
+    [DataRow("zh-CN", false, true)]
+    [DataRow("zh-TW", false, true)]
+    [DataRow("en-US", true, true)]
+    [DataRow("zh-CN", true, true)]
+    [DataRow("zh-TW", true, true)]
+    [DataRow("en-US", false, false)]
+    [DataRow("zh-CN", false, false)]
+    [DataRow("zh-TW", false, false)]
+    [DataRow("en-US", true, false)]
+    [DataRow("zh-CN", true, false)]
+    [DataRow("zh-TW", true, false)]
+    public void MainFormCapturePreservesForegroundNavigationPixels(string language, bool dark, bool collapsed)
+    {
+        using var form = new OffscreenMainForm();
+        form.Show();
+        form.SetLanguage(language);
+        form.NavigateTo("LogsPage2");
+        Config.IsLight = !dark;
+        AntdUI.Panel navigation = GetControl<AntdUI.Panel>(form, "_navigationPanel");
+        AntdUI.Panel workspace = GetControl<AntdUI.Panel>(form, "_workspacePanel");
+        NavigationMenu menu = GetControl<NavigationMenu>(form, "_navigationMenu");
+        if (menu.Collapsed != collapsed)
+        {
+            InvokeClick(GetControl<AntdUI.Button>(form, "_collapseButton"));
+        }
+
+        Assert.AreEqual(collapsed, menu.Collapsed);
+        Assert.IsTrue(form.Controls.GetChildIndex(navigation) < form.Controls.GetChildIndex(workspace),
+            "The navigation must remain in front of the workspace in the actual control tree.");
+        Assert.AreEqual(navigation.Handle, GetWindow(form.Handle, 5),
+            "The navigation must also be the first child in the native window Z order.");
+        using Bitmap expected = CaptureControl(navigation);
+        using Bitmap actual = CaptureControl(form);
+        actual.Save(Path.Combine(GetUiArtifactDirectory(),
+            $"main-{language}-{(dark ? "dark" : "light")}-navigation-{(collapsed ? "collapsed" : "expanded")}.png"),
+            ImageFormat.Png);
+        AssertBitmapRegionEqual(expected, new Rectangle(Point.Empty, expected.Size), actual, navigation.Bounds,
+            $"The shell capture must preserve navigation pixels: language={language}, dark={dark}, collapsed={collapsed}.");
+    }
+
     /// <summary>Checks the blank About modal has one DPI scale and leaves the selected page and history unchanged.</summary>
     /// <param name="language">The application language exercised by the real About action.</param>
     /// <param name="dark">Whether the modal initially uses the dark theme.</param>
@@ -3019,28 +3241,50 @@ public sealed class DesktopUiTests
         control.PerformLayout();
         // AntdUI activates tab content through BeginInvoke; flush its queued UI work before printing.
         Application.DoEvents();
-        var bitmap = new Bitmap(control.ClientSize.Width, control.ClientSize.Height);
-        using Graphics graphics = Graphics.FromImage(bitmap);
-        nint deviceContext = graphics.GetHdc();
+        Bitmap? bitmap = new Bitmap(control.ClientSize.Width, control.ClientSize.Height);
         try
         {
-            // WM_PRINT with PRF_CHECKVISIBLE excludes hidden tab pages; no native caption is requested.
-            _ = SendMessage(control.Handle, 0x0317, deviceContext, 0x001D);
+            using Graphics graphics = Graphics.FromImage(bitmap);
+            if (control is MainForm)
+            {
+                graphics.Clear(control.BackColor);
+                // Whole-window WM_PRINT paints the workspace over the overlapping navigation; compose back to front.
+                foreach (Control child in control.Controls.Cast<Control>().Where(static child => child.Visible).Reverse())
+                {
+                    using Bitmap childBitmap = CaptureControl(child);
+                    graphics.DrawImageUnscaled(childBitmap, child.Location);
+                }
+            }
+            else
+            {
+                nint deviceContext = graphics.GetHdc();
+                try
+                {
+                    // WM_PRINT with PRF_CHECKVISIBLE excludes hidden tab pages; no native caption is requested.
+                    _ = SendMessage(control.Handle, 0x0317, deviceContext, 0x001D);
+                }
+                finally
+                {
+                    graphics.ReleaseHdc(deviceContext);
+                }
+            }
+
+            Bitmap result = bitmap;
+            bitmap = null;
+            return result;
         }
         finally
         {
-            graphics.ReleaseHdc(deviceContext);
+            bitmap?.Dispose();
         }
-
-        return bitmap;
     }
 
     private static string GetUiArtifactDirectory()
     {
         var directory = new DirectoryInfo(AppContext.BaseDirectory);
-        while (!File.Exists(Path.Combine(directory.FullName, "FbSample.slnx")))
+        while (!File.Exists(Path.Combine(directory.FullName, "FbSample.sln")))
         {
-            directory = directory.Parent ?? throw new DirectoryNotFoundException("FbSample.slnx was not found.");
+            directory = directory.Parent ?? throw new DirectoryNotFoundException("FbSample.sln was not found.");
         }
 
         string outputDirectory = Path.Combine(directory.FullName, "artifacts", "ui");
@@ -3095,4 +3339,8 @@ public sealed class DesktopUiTests
     [DllImport("user32.dll", EntryPoint = "SendMessageW", ExactSpelling = true)]
     [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
     private static extern nint SendMessage(nint window, uint message, nint wParam, nint lParam);
+
+    [DllImport("user32.dll", ExactSpelling = true)]
+    [DefaultDllImportSearchPaths(DllImportSearchPath.System32)]
+    private static extern nint GetWindow(nint window, uint command);
 }

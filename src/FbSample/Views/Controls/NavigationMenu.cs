@@ -14,6 +14,7 @@ public sealed class NavigationMenu : AntdUI.Menu, IMessageFilter
     private bool _dark;
     private bool _isFlyout;
     private bool _showKeyboardFocus;
+    private bool _mouseDownHitItem;
     private AntdUI.MenuItem? _hoveredItem;
     private AntdUI.MenuItem? _previousHoveredItem;
     private AntdUI.MenuItem? _pressedItem;
@@ -63,6 +64,7 @@ public sealed class NavigationMenu : AntdUI.Menu, IMessageFilter
     {
         if (_pressedItem is null)
         {
+            _mouseDownHitItem = false;
             OnTouchCancel();
             ScrollBar.MouseUp();
             return;
@@ -185,7 +187,15 @@ public sealed class NavigationMenu : AntdUI.Menu, IMessageFilter
             focusRow.Inflate(-2, -2);
             float diameter = Radius * 2 * (DeviceDpi / 96F);
             using var focusPath = new GraphicsPath();
-            focusPath.AddRoundedRectangle(focusRow, new SizeF(diameter, diameter));
+            focusPath.AddArc(focusRow.Right - diameter, focusRow.Top,
+                diameter, diameter, -90, 90);
+            focusPath.AddArc(focusRow.Right - diameter, focusRow.Bottom - diameter,
+                diameter, diameter, 0, 90);
+            focusPath.AddArc(focusRow.Left, focusRow.Bottom - diameter,
+                diameter, diameter, 90, 90);
+            focusPath.AddArc(focusRow.Left, focusRow.Top,
+                diameter, diameter, 180, 90);
+            focusPath.CloseFigure();
             e.Canvas.Draw(_dark ? Color.FromArgb(161, 166, 174) : Color.FromArgb(110, 116, 124),
                 DeviceDpi / 96F, DashStyle.Dash, focusPath);
         }
@@ -207,8 +217,7 @@ public sealed class NavigationMenu : AntdUI.Menu, IMessageFilter
         int indent = Collapsed ? 0 : current.Rect("Icon").X - root.Rect("Icon").X;
         var indicator = new RectangleF(row.X + indent + (3 * scale),
             row.Y + ((row.Height - (16 * scale)) / 2), 3 * scale, 16 * scale);
-        using var path = new GraphicsPath();
-        path.AddRoundedRectangle(indicator, new SizeF(3 * scale, 3 * scale));
+        using GraphicsPath path = indicator.RoundPath(1.5F * scale);
         e.Canvas.Fill(s_indicatorColor, path);
     }
 
@@ -258,6 +267,7 @@ public sealed class NavigationMenu : AntdUI.Menu, IMessageFilter
         }
 
         _pressedItem = HitTest(e.X, e.Y);
+        _mouseDownHitItem = _pressedItem is not null;
         SetHoveredItem(_pressedItem);
         _showKeyboardFocus = false;
         base.OnMouseDown(e);
@@ -270,6 +280,7 @@ public sealed class NavigationMenu : AntdUI.Menu, IMessageFilter
         AntdUI.MenuItem? pressed = _pressedItem;
         base.OnMouseUp(e);
         _pressedItem = null;
+        _mouseDownHitItem = false;
         if (e.Button == MouseButtons.Left && Collapsed && pressed is { CanExpand: true, Enabled: true }
             && pressed == HitTest(e.X, e.Y))
         {
@@ -285,6 +296,9 @@ public sealed class NavigationMenu : AntdUI.Menu, IMessageFilter
 
         Invalidate();
     }
+
+    /// <inheritdoc />
+    protected override bool OnTouchUp() => base.OnTouchUp() && _mouseDownHitItem;
 
     /// <inheritdoc />
     protected override void OnMouseLeave(EventArgs e)
@@ -482,9 +496,7 @@ public sealed class NavigationMenu : AntdUI.Menu, IMessageFilter
         }
 
         Rectangle row = item.Rect(0, ScrollBar.ValueY);
-        float diameter = Radius * 2 * (DeviceDpi / 96F);
-        using var path = new GraphicsPath();
-        path.AddRoundedRectangle(row, new SizeF(diameter, diameter));
+        using GraphicsPath path = row.RoundPath(Radius * (DeviceDpi / 96F));
         canvas.Fill(color, path);
     }
 

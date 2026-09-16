@@ -1,8 +1,0 @@
-<Solution>
-  <Folder Name="/src/">
-    <Project Path="src/FbSample/FbSample.csproj" />
-  </Folder>
-  <Folder Name="/tests/">
-    <Project Path="tests/FbSample.Tests/FbSample.Tests.csproj" />
-  </Folder>
-</Solution>

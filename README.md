@@ -2,17 +2,17 @@
 
 ## 技术栈
 
-| 类别 | 配置 |
-| --- | --- |
-| 开发语言 | C# 14 |
-| 目标框架 | .NET 10，`net10.0-windows` |
-| .NET SDK | `10.0.400`，通过 `global.json` 固定 |
-| 桌面 UI | Windows Forms（WinForms）、AntdUI `2.4.8` |
+| 类别 | 说明                                                                                        |
+| --- |---------------------------------------------------------------------------------------------|
+| 开发语言 | C# 12                                                                                       |
+| 目标框架 | .NET 8，`net8.0-windows`                                                                    |
+| .NET SDK | `8.0.425`，通过 `global.json` 固定                                                          |
+| 桌面 UI | Windows Forms（WinForms）、AntdUI `2.4.8`                                                   |
 | 多语言 | `.resx` 资源与 AntdUI 本地化，支持英语（`en-US`）、简体中文（`zh-CN`）、繁体中文（`zh-TW`） |
-| DPI 缩放 | PerMonitorV2 |
-| 依赖管理 | NuGet 中央包版本管理与 `packages.lock.json` 锁文件 |
-| 自动化测试 | MSTest `4.3.3`、Microsoft.NET.Test.Sdk `18.9.0`，STA 桌面交互与渲染集成测试 |
-| 代码检查 | .NET 内置分析器、可空引用类型、编译警告视为错误、`.editorconfig` |
+| DPI 缩放 | PerMonitorV2                                                                                |
+| 依赖管理 | NuGet 中央包版本管理与 `packages.lock.json` 锁文件                                          |
+| 自动化测试 | MSTest `4.3.3`、Microsoft.NET.Test.Sdk `18.9.0`，STA 桌面交互与渲染集成测试                 |
+| 代码检查 | .NET 内置分析器、可空引用类型、编译警告视为错误、`.editorconfig`                            |
 
 ## 目录结构
 
@@ -86,7 +86,7 @@ FbSample/
 ├── .gitignore                                       # Git 忽略规则
 ├── Directory.Build.props                            # 统一编译与分析规则
 ├── Directory.Packages.props                         # NuGet 包版本
-├── FbSample.slnx                                    # 解决方案
+├── FbSample.sln                                     # 解决方案
 ├── global.json                                      # .NET SDK 版本
 ├── LICENSE                                          # Apache-2.0 项目授权与第三方声明
 └── README.md                                        # README 文档

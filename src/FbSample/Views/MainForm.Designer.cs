@@ -42,15 +42,15 @@ partial class MainForm
     [System.Diagnostics.CodeAnalysis.MemberNotNull(nameof(_titleBar), nameof(_searchInput), nameof(_languageDropdown), nameof(_themeButton), nameof(_aboutButton), nameof(_collapseButton), nameof(_backButton), nameof(_navigationLogo), nameof(_brandLabel), nameof(_navigationTooltips), nameof(_navigationHeaderPanel), nameof(_navigationToolsPanel), nameof(_navigationDivider), nameof(_workspacePanel), nameof(_contentPanel), nameof(_dashboardPage), nameof(_navigationMenu), nameof(_navigationPanel))]
     private void InitializeComponent()
     {
-        AntdUI.MenuItem dashboardItem = new AntdUI.MenuItem();
-        AntdUI.MenuItem devicesItem = new AntdUI.MenuItem();
-        AntdUI.MenuItem monitorItem = new AntdUI.MenuItem();
-        AntdUI.MenuItem logsItem = new AntdUI.MenuItem();
-        AntdUI.MenuItem logsPage1Item = new AntdUI.MenuItem();
-        AntdUI.MenuItem logsPage2Item = new AntdUI.MenuItem();
-        AntdUI.MenuItem debugItem = new AntdUI.MenuItem();
-        AntdUI.MenuItem debugPage1Item = new AntdUI.MenuItem();
-        AntdUI.MenuItem settingsItem = new AntdUI.MenuItem();
+        var menuItem1 = new AntdUI.MenuItem();
+        var menuItem2 = new AntdUI.MenuItem();
+        var menuItem3 = new AntdUI.MenuItem();
+        var menuItem4 = new AntdUI.MenuItem();
+        var menuItem5 = new AntdUI.MenuItem();
+        var menuItem6 = new AntdUI.MenuItem();
+        var menuItem7 = new AntdUI.MenuItem();
+        var menuItem8 = new AntdUI.MenuItem();
+        var menuItem9 = new AntdUI.MenuItem();
         _titleBar = new AntdUI.PageHeader();
         _searchInput = new AntdUI.Input();
         _languageDropdown = new AntdUI.Dropdown();
@@ -61,54 +61,24 @@ partial class MainForm
         _navigationLogo = new AntdUI.Avatar();
         _brandLabel = new AntdUI.Label();
         _navigationTooltips = new AntdUI.TooltipComponent();
-        _navigationTooltips.ArrowAlign = AntdUI.TAlign.Right;
         _navigationHeaderPanel = new AntdUI.Panel();
         _navigationToolsPanel = new AntdUI.Panel();
         _navigationDivider = new AntdUI.Panel();
         _workspacePanel = new AntdUI.Panel();
         _contentPanel = new AntdUI.Panel();
-        _dashboardPage = new Pages.DashboardPage();
-        _navigationMenu = new Controls.NavigationMenu();
+        _dashboardPage = new FbSample.Views.Pages.DashboardPage();
+        _navigationMenu = new FbSample.Views.Controls.NavigationMenu();
         _navigationPanel = new AntdUI.Panel();
         _titleBar.SuspendLayout();
-        _contentPanel.SuspendLayout();
-        _navigationPanel.SuspendLayout();
         _navigationHeaderPanel.SuspendLayout();
         _navigationToolsPanel.SuspendLayout();
         _workspacePanel.SuspendLayout();
+        _contentPanel.SuspendLayout();
+        _navigationPanel.SuspendLayout();
         SuspendLayout();
-        dashboardItem.Name = "Dashboard";
-        dashboardItem.Text = "Dashboard";
-        dashboardItem.IconSvg = "HomeOutlined";
-        devicesItem.Name = "Devices";
-        devicesItem.Text = "Devices";
-        devicesItem.IconSvg = "ClusterOutlined";
-        monitorItem.Name = "Monitor";
-        monitorItem.Text = "Monitor";
-        monitorItem.IconSvg = "DesktopOutlined";
-        logsItem.Name = "Logs";
-        logsItem.Text = "Logs";
-        logsItem.IconSvg = "FileTextOutlined";
-        logsPage1Item.Name = "LogsPage1";
-        logsPage1Item.Text = "LogsPage1";
-        logsPage1Item.IconSvg = "FileTextOutlined";
-        logsPage2Item.Name = "LogsPage2";
-        logsPage2Item.Text = "LogsPage2";
-        logsPage2Item.IconSvg = "FileTextOutlined";
-        debugItem.Name = "Debug";
-        debugItem.Text = "Debug";
-        debugItem.IconSvg = "BugOutlined";
-        debugPage1Item.Name = "DebugPage1";
-        debugPage1Item.Text = "DebugPage1";
-        debugPage1Item.IconSvg = "CodeOutlined";
-        settingsItem.Name = "Settings";
-        settingsItem.Text = "Settings";
-        settingsItem.IconSvg = "SettingOutlined";
-        logsItem.Sub.Add(logsPage1Item);
-        logsItem.Sub.Add(logsPage2Item);
-        debugItem.Sub.Add(debugPage1Item);
+        //
         // _titleBar
-        _titleBar.Name = "_titleBar";
+        //
         _titleBar.BackColor = Color.FromArgb(247, 247, 247);
         _titleBar.Controls.Add(_searchInput);
         _titleBar.Controls.Add(_languageDropdown);
@@ -117,166 +87,271 @@ partial class MainForm
         _titleBar.DividerShow = true;
         _titleBar.Dock = DockStyle.Top;
         _titleBar.Location = new Point(0, 0);
+        _titleBar.Margin = new Padding(4, 4, 4, 4);
+        _titleBar.Name = "_titleBar";
         _titleBar.ShowButton = true;
-        _titleBar.ShowIcon = false;
-        _titleBar.Size = new Size(966, 36);
+        _titleBar.Size = new Size(1438, 54);
+        _titleBar.TabIndex = 3;
+        //
         // _searchInput
-        _searchInput.Name = "_searchInput";
+        //
         _searchInput.AllowClear = true;
         _searchInput.Dock = DockStyle.Right;
         _searchInput.LocalizationPlaceholderText = "Search";
-        _searchInput.Location = new Point(472, 0);
+        _searchInput.Location = new Point(697, 0);
+        _searchInput.Margin = new Padding(4, 4, 4, 4);
+        _searchInput.Name = "_searchInput";
         _searchInput.PlaceholderText = "Search";
         _searchInput.PrefixSvg = "SearchOutlined";
-        _searchInput.Size = new Size(200, 36);
+        _searchInput.Size = new Size(300, 54);
         _searchInput.TabIndex = 0;
         _searchInput.TextChanged += SearchChanged;
+        //
         // _languageDropdown
-        _languageDropdown.Name = "_languageDropdown";
+        //
         _languageDropdown.Dock = DockStyle.Right;
         _languageDropdown.Ghost = true;
         _languageDropdown.IconSvg = "TranslationOutlined";
         _languageDropdown.Items.AddRange(new object[] { "English", "简体中文", "繁體中文" });
-        _languageDropdown.Location = new Point(672, 0);
+        _languageDropdown.Location = new Point(997, 0);
+        _languageDropdown.Margin = new Padding(4, 4, 4, 4);
+        _languageDropdown.Name = "_languageDropdown";
         _languageDropdown.Placement = AntdUI.TAlignFrom.BR;
-        _languageDropdown.Size = new Size(50, 36);
+        _languageDropdown.Size = new Size(75, 54);
         _languageDropdown.TabIndex = 1;
         _languageDropdown.Trigger = AntdUI.Trigger.Hover;
         _languageDropdown.WaveSize = 0;
         _languageDropdown.SelectedValueChanged += LanguageChanged;
+        //
         // _themeButton
-        _themeButton.Name = "_themeButton";
+        //
         _themeButton.Dock = DockStyle.Right;
         _themeButton.Ghost = true;
         _themeButton.IconSvg = "SunOutlined";
-        _themeButton.Location = new Point(722, 0);
+        _themeButton.Location = new Point(1072, 0);
+        _themeButton.Margin = new Padding(4, 4, 4, 4);
+        _themeButton.Name = "_themeButton";
         _themeButton.Radius = 0;
-        _themeButton.Size = new Size(50, 36);
+        _themeButton.Size = new Size(75, 54);
         _themeButton.TabIndex = 2;
         _themeButton.ToggleIconSvg = "MoonOutlined";
         _themeButton.WaveSize = 0;
         _themeButton.Click += ThemeClicked;
+        //
         // _aboutButton
-        _aboutButton.Name = "_aboutButton";
+        //
         _aboutButton.Dock = DockStyle.Right;
         _aboutButton.Ghost = true;
         _aboutButton.IconSvg = "InfoCircleOutlined";
-        _aboutButton.Location = new Point(772, 0);
+        _aboutButton.Location = new Point(1147, 0);
+        _aboutButton.Margin = new Padding(4, 4, 4, 4);
+        _aboutButton.Name = "_aboutButton";
         _aboutButton.Radius = 0;
-        _aboutButton.Size = new Size(50, 36);
+        _aboutButton.Size = new Size(75, 54);
         _aboutButton.TabIndex = 3;
         _aboutButton.WaveSize = 0;
         _aboutButton.Click += AboutClicked;
+        //
         // _collapseButton
-        _collapseButton.Name = "_collapseButton";
+        //
         _collapseButton.Ghost = true;
         _collapseButton.IconRatio = 0.9150327F;
         _collapseButton.IconSvg = "MenuOutlined";
-        _collapseButton.Location = new Point(4, 0);
+        _collapseButton.Location = new Point(6, 0);
+        _collapseButton.Margin = new Padding(4, 4, 4, 4);
+        _collapseButton.Name = "_collapseButton";
         _collapseButton.Radius = 5;
-        _collapseButton.Size = new Size(49, 41);
+        _collapseButton.Size = new Size(74, 62);
         _collapseButton.TabIndex = 1;
         _collapseButton.WaveSize = 0;
         _collapseButton.Click += CollapseClicked;
+        //
         // _backButton
-        _backButton.Name = "_backButton";
+        //
         _backButton.AccessibleName = "Back";
         _backButton.Enabled = false;
         _backButton.Ghost = true;
         _backButton.IconRatio = 0.9150327F;
         _backButton.IconSvg = "ArrowLeftOutlined";
-        _backButton.Location = new Point(4, 4);
+        _backButton.Location = new Point(6, 6);
+        _backButton.Margin = new Padding(4, 4, 4, 4);
+        _backButton.Name = "_backButton";
         _backButton.Radius = 5;
-        _backButton.Size = new Size(49, 41);
+        _backButton.Size = new Size(74, 62);
         _backButton.TabIndex = 0;
         _backButton.Visible = false;
         _backButton.WaveSize = 0;
         _backButton.Click += BackClicked;
+        //
         // _navigationLogo
-        _navigationLogo.Name = "_navigationLogo";
+        //
         _navigationLogo.AccessibleName = "FbSample";
         _navigationLogo.AccessibleRole = AccessibleRole.Graphic;
         _navigationLogo.Image = Properties.Resources.NavigationLogo;
         _navigationLogo.ImageFit = AntdUI.TFit.Contain;
-        _navigationLogo.Location = new Point(20, 16);
-        _navigationLogo.Radius = 0;
-        _navigationLogo.Size = new Size(17, 17);
+        _navigationLogo.Location = new Point(30, 24);
+        _navigationLogo.Margin = new Padding(4, 4, 4, 4);
+        _navigationLogo.Name = "_navigationLogo";
+        _navigationLogo.Size = new Size(26, 26);
+        _navigationLogo.TabIndex = 0;
         _navigationLogo.TabStop = false;
+        //
         // _brandLabel
+        //
+        _brandLabel.Location = new Point(96, 6);
+        _brandLabel.Margin = new Padding(4, 4, 4, 4);
         _brandLabel.Name = "_brandLabel";
-        _brandLabel.Location = new Point(64, 4);
-        _brandLabel.Size = new Size(179, 41);
+        _brandLabel.Size = new Size(268, 62);
+        _brandLabel.TabIndex = 1;
         _brandLabel.Text = "FbSample";
         _brandLabel.Visible = false;
+        //
+        // _navigationTooltips
+        //
+        _navigationTooltips.ArrowAlign = AntdUI.TAlign.Right;
+        //
         // _navigationHeaderPanel
-        _navigationHeaderPanel.Name = "_navigationHeaderPanel";
+        //
         _navigationHeaderPanel.Back = Color.Transparent;
         _navigationHeaderPanel.Controls.Add(_navigationLogo);
         _navigationHeaderPanel.Controls.Add(_backButton);
         _navigationHeaderPanel.Controls.Add(_brandLabel);
         _navigationHeaderPanel.Dock = DockStyle.Top;
+        _navigationHeaderPanel.Location = new Point(0, 0);
+        _navigationHeaderPanel.Margin = new Padding(4, 4, 4, 4);
+        _navigationHeaderPanel.Name = "_navigationHeaderPanel";
         _navigationHeaderPanel.Radius = 0;
-        _navigationHeaderPanel.Size = new Size(57, 47);
+        _navigationHeaderPanel.Size = new Size(85, 70);
         _navigationHeaderPanel.TabIndex = 0;
+        //
         // _navigationToolsPanel
-        _navigationToolsPanel.Name = "_navigationToolsPanel";
+        //
         _navigationToolsPanel.Back = Color.Transparent;
         _navigationToolsPanel.Controls.Add(_collapseButton);
         _navigationToolsPanel.Dock = DockStyle.Top;
-        _navigationToolsPanel.Location = new Point(0, 47);
+        _navigationToolsPanel.Location = new Point(0, 70);
+        _navigationToolsPanel.Margin = new Padding(4, 4, 4, 4);
+        _navigationToolsPanel.Name = "_navigationToolsPanel";
         _navigationToolsPanel.Radius = 0;
-        _navigationToolsPanel.Size = new Size(57, 43);
+        _navigationToolsPanel.Size = new Size(85, 64);
         _navigationToolsPanel.TabIndex = 1;
+        //
         // _navigationDivider
-        _navigationDivider.Name = "_navigationDivider";
+        //
         _navigationDivider.Back = Color.FromArgb(225, 230, 234);
         _navigationDivider.Dock = DockStyle.Right;
-        _navigationDivider.Location = new Point(57, 0);
+        _navigationDivider.Location = new Point(85, 0);
+        _navigationDivider.Margin = new Padding(4, 4, 4, 4);
+        _navigationDivider.Name = "_navigationDivider";
         _navigationDivider.Radius = 0;
-        _navigationDivider.Size = new Size(1, 640);
+        _navigationDivider.Size = new Size(2, 960);
+        _navigationDivider.TabIndex = 3;
+        //
         // _workspacePanel
-        _workspacePanel.Name = "_workspacePanel";
+        //
         _workspacePanel.Back = Color.FromArgb(243, 243, 243);
         _workspacePanel.BackColor = Color.FromArgb(243, 243, 243);
         _workspacePanel.Controls.Add(_contentPanel);
         _workspacePanel.Controls.Add(_titleBar);
         _workspacePanel.Dock = DockStyle.Fill;
-        _workspacePanel.Location = new Point(58, 0);
+        _workspacePanel.Location = new Point(87, 0);
+        _workspacePanel.Margin = new Padding(4, 4, 4, 4);
+        _workspacePanel.Name = "_workspacePanel";
         _workspacePanel.Radius = 0;
-        _workspacePanel.Size = new Size(966, 640);
+        _workspacePanel.Size = new Size(1438, 932);
         _workspacePanel.TabIndex = 1;
+        //
         // _contentPanel
-        _contentPanel.Name = "_contentPanel";
+        //
         _contentPanel.Back = Color.FromArgb(243, 243, 243);
         _contentPanel.BackColor = Color.FromArgb(243, 243, 243);
         _contentPanel.Controls.Add(_dashboardPage);
         _contentPanel.Dock = DockStyle.Fill;
-        _contentPanel.Location = new Point(0, 36);
+        _contentPanel.Location = new Point(0, 54);
+        _contentPanel.Margin = new Padding(4, 4, 4, 4);
+        _contentPanel.Name = "_contentPanel";
         _contentPanel.Radius = 0;
-        _contentPanel.Size = new Size(966, 604);
+        _contentPanel.Size = new Size(1438, 878);
         _contentPanel.TabIndex = 2;
+        //
         // _dashboardPage
-        _dashboardPage.Name = "_dashboardPage";
+        //
+        _dashboardPage.BackColor = Color.FromArgb(243, 243, 243);
         _dashboardPage.Dock = DockStyle.Fill;
+        _dashboardPage.Font = new Font("Microsoft YaHei UI", 10F);
         _dashboardPage.Location = new Point(0, 0);
-        _dashboardPage.Size = new Size(966, 604);
+        _dashboardPage.Margin = new Padding(6, 6, 6, 6);
+        _dashboardPage.Name = "_dashboardPage";
+        _dashboardPage.Size = new Size(1438, 878);
+        _dashboardPage.TabIndex = 0;
+        //
         // _navigationMenu
-        _navigationMenu.Name = "_navigationMenu";
+        //
+        _navigationMenu.BackActive = Color.Transparent;
         _navigationMenu.BackColor = Color.FromArgb(239, 244, 249);
+        _navigationMenu.BackHover = Color.Transparent;
         _navigationMenu.Collapsed = true;
         _navigationMenu.Dock = DockStyle.Fill;
+        _navigationMenu.ForeActive = Color.FromArgb(38, 38, 38);
+        _navigationMenu.ForeColor = Color.FromArgb(38, 38, 38);
+        _navigationMenu.Gap = 12;
         _navigationMenu.IconGap = 27;
         _navigationMenu.IconRatio = 1F;
         _navigationMenu.Indent = true;
-        _navigationMenu.Items.AddRange(new AntdUI.MenuItem[] { dashboardItem, devicesItem, monitorItem, logsItem, debugItem, settingsItem });
-        _navigationMenu.Location = new Point(0, 90);
-        _navigationMenu.Padding = new Padding(4, 0, 4, 4);
-        _navigationMenu.Size = new Size(57, 550);
+        _navigationMenu.itemMargin = 2;
+        menuItem1.IconSvg = "HomeOutlined";
+        menuItem1.Name = "Dashboard";
+        menuItem1.Text = "Dashboard";
+        menuItem2.Expand = false;
+        menuItem2.IconSvg = "ClusterOutlined";
+        menuItem2.Name = "Devices";
+        menuItem2.Text = "Devices";
+        menuItem3.Expand = false;
+        menuItem3.IconSvg = "DesktopOutlined";
+        menuItem3.Name = "Monitor";
+        menuItem3.Text = "Monitor";
+        menuItem4.Expand = false;
+        menuItem4.IconSvg = "FileTextOutlined";
+        menuItem4.Name = "Logs";
+        menuItem5.IconSvg = "FileTextOutlined";
+        menuItem5.Name = "LogsPage1";
+        menuItem5.Text = "LogsPage1";
+        menuItem6.IconSvg = "FileTextOutlined";
+        menuItem6.Name = "LogsPage2";
+        menuItem6.Text = "LogsPage2";
+        menuItem4.Sub.Add(menuItem5);
+        menuItem4.Sub.Add(menuItem6);
+        menuItem4.Text = "Logs";
+        menuItem7.Expand = false;
+        menuItem7.IconSvg = "BugOutlined";
+        menuItem7.Name = "Debug";
+        menuItem8.IconSvg = "CodeOutlined";
+        menuItem8.Name = "DebugPage1";
+        menuItem8.Text = "DebugPage1";
+        menuItem7.Sub.Add(menuItem8);
+        menuItem7.Text = "Debug";
+        menuItem9.Expand = false;
+        menuItem9.IconSvg = "SettingOutlined";
+        menuItem9.Name = "Settings";
+        menuItem9.Text = "Settings";
+        _navigationMenu.Items.Add(menuItem1);
+        _navigationMenu.Items.Add(menuItem2);
+        _navigationMenu.Items.Add(menuItem3);
+        _navigationMenu.Items.Add(menuItem4);
+        _navigationMenu.Items.Add(menuItem7);
+        _navigationMenu.Items.Add(menuItem9);
+        _navigationMenu.Location = new Point(0, 134);
+        _navigationMenu.Margin = new Padding(4, 4, 4, 4);
+        _navigationMenu.Name = "_navigationMenu";
+        _navigationMenu.Padding = new Padding(6, 0, 6, 6);
+        _navigationMenu.Radius = 5;
+        _navigationMenu.Size = new Size(85, 826);
         _navigationMenu.TabIndex = 2;
         _navigationMenu.Unique = true;
         _navigationMenu.ItemClick += NavigationClicked;
+        //
         // _navigationPanel
-        _navigationPanel.Name = "_navigationPanel";
+        //
         _navigationPanel.Back = Color.FromArgb(239, 244, 249);
         _navigationPanel.BackColor = Color.FromArgb(239, 244, 249);
         _navigationPanel.Controls.Add(_navigationMenu);
@@ -284,31 +359,35 @@ partial class MainForm
         _navigationPanel.Controls.Add(_navigationHeaderPanel);
         _navigationPanel.Controls.Add(_navigationDivider);
         _navigationPanel.Location = new Point(0, 0);
+        _navigationPanel.Margin = new Padding(4, 4, 4, 4);
+        _navigationPanel.Name = "_navigationPanel";
         _navigationPanel.Radius = 0;
-        _navigationPanel.Size = new Size(58, 640);
+        _navigationPanel.Size = new Size(87, 960);
         _navigationPanel.TabIndex = 0;
+        //
         // MainForm
-        AutoScaleDimensions = new SizeF(96F, 96F);
+        //
+        AutoScaleDimensions = new SizeF(144F, 144F);
         AutoScaleMode = AutoScaleMode.Dpi;
         BackColor = Color.White;
-        ClientSize = new Size(1024, 640);
+        ClientSize = new Size(1525, 932);
         ControlBox = false;
         Controls.Add(_navigationPanel);
         Controls.Add(_workspacePanel);
-        Font = new Font("Microsoft YaHei UI", 10F);
         Icon = Properties.Resources.AppIcon;
-        MinimumSize = new Size(900, 560);
+        Margin = new Padding(4, 4, 4, 4);
+        MinimumSize = new Size(1339, 812);
         Name = "MainForm";
-        Padding = new Padding(58, 0, 0, 0);
+        Padding = new Padding(87, 0, 0, 0);
         StartPosition = FormStartPosition.CenterScreen;
         Text = "FbSample";
         Layout += ShellLayout;
         _titleBar.ResumeLayout(false);
-        _contentPanel.ResumeLayout(false);
-        _navigationPanel.ResumeLayout(false);
         _navigationHeaderPanel.ResumeLayout(false);
         _navigationToolsPanel.ResumeLayout(false);
         _workspacePanel.ResumeLayout(false);
+        _contentPanel.ResumeLayout(false);
+        _navigationPanel.ResumeLayout(false);
         ResumeLayout(false);
     }
 }

@@ -1,12 +1,13 @@
 <Project>
   <PropertyGroup>
+    <LangVersion>12.0</LangVersion>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
 
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
-    <AnalysisLevel>10.0-recommended</AnalysisLevel>
-    <AnalysisLevelSecurity>10.0-all</AnalysisLevelSecurity>
+    <AnalysisLevel>8.0-recommended</AnalysisLevel>
+    <AnalysisLevelSecurity>8.0-all</AnalysisLevelSecurity>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
@@ -18,6 +19,6 @@
 
     <NuGetAudit>true</NuGetAudit>
     <NuGetAuditMode>all</NuGetAuditMode>
-    <NuGetAuditLevel>moderate</NuGetAuditLevel>
+    <NuGetAuditLevel>low</NuGetAuditLevel>
   </PropertyGroup>
 </Project>

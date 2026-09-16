@@ -21,9 +21,11 @@ partial class AboutControl
     private void InitializeComponent()
     {
         SuspendLayout();
+        //
+        // AboutControl
+        //
         AutoScaleMode = AutoScaleMode.Inherit;
         BackColor = Color.White;
-        Font = new Font("Microsoft YaHei UI", 10F);
         Name = "AboutControl";
         Size = new Size(598, 396);
         ResumeLayout(false);

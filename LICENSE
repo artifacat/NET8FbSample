@@ -220,9 +220,9 @@ The Apache-2.0 license text for AntdUI and AntdUI-Demo is reproduced above.
 Modified files derived from the reference layout: `Views/MainForm.Designer.cs` and
 `Views/Pages/SettingsPage.Designer.cs`. FbSample provides six blank, designer-editable pages
 and a compact Settings page, changes application branding, adds Traditional Chinese resources,
-and adapts startup, navigation, disposal, and language handling for .NET 10.
+and adapts startup, navigation, disposal, and language handling for .NET 8.
 
-The AntdUI package has no transitive dependencies for `net10.0-windows`. It provides the required
+The AntdUI package has no transitive dependencies for `net8.0-windows`. It provides the required
 WinForms controls and designer metadata; the BCL alone cannot reproduce those controls.
 Native AOT and trimming are not enabled for this designer-oriented desktop application.
 

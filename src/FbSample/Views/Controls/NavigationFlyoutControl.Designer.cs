@@ -27,40 +27,55 @@ partial class NavigationFlyoutControl
         _navigationFlyoutMenu = new NavigationMenu();
         _navigationFlyoutPanel.SuspendLayout();
         SuspendLayout();
+        //
         // _navigationFlyoutPanel
-        _navigationFlyoutPanel.Name = "_navigationFlyoutPanel";
+        //
         _navigationFlyoutPanel.Back = Color.FromArgb(247, 247, 247);
         _navigationFlyoutPanel.BackColor = Color.FromArgb(243, 243, 243);
         _navigationFlyoutPanel.BorderColor = Color.FromArgb(204, 204, 204);
         _navigationFlyoutPanel.BorderWidth = 1F;
         _navigationFlyoutPanel.Controls.Add(_navigationFlyoutMenu);
         _navigationFlyoutPanel.Dock = DockStyle.Fill;
-        _navigationFlyoutPanel.Location = Point.Empty;
-        _navigationFlyoutPanel.Padding = new Padding(4);
+        _navigationFlyoutPanel.Location = new Point(0, 0);
+        _navigationFlyoutPanel.Margin = new Padding(4, 4, 4, 4);
+        _navigationFlyoutPanel.Name = "_navigationFlyoutPanel";
+        _navigationFlyoutPanel.Padding = new Padding(6, 6, 6, 6);
         _navigationFlyoutPanel.Radius = 8;
         _navigationFlyoutPanel.Shadow = 8;
         _navigationFlyoutPanel.ShadowColor = Color.Black;
         _navigationFlyoutPanel.ShadowDelay = 0;
         _navigationFlyoutPanel.ShadowOpacity = 0.12F;
-        _navigationFlyoutPanel.ShadowOpacityAnimation = false;
-        _navigationFlyoutPanel.Size = new Size(166, 122);
+        _navigationFlyoutPanel.Size = new Size(249, 183);
         _navigationFlyoutPanel.TabIndex = 0;
+        //
         // _navigationFlyoutMenu
-        _navigationFlyoutMenu.Name = "_navigationFlyoutMenu";
+        //
+        _navigationFlyoutMenu.BackActive = Color.Transparent;
         _navigationFlyoutMenu.BackColor = Color.FromArgb(247, 247, 247);
+        _navigationFlyoutMenu.BackHover = Color.Transparent;
         _navigationFlyoutMenu.Dock = DockStyle.Fill;
-        _navigationFlyoutMenu.Location = new Point(13, 13);
-        _navigationFlyoutMenu.Padding = new Padding(4);
-        _navigationFlyoutMenu.Size = new Size(140, 96);
+        _navigationFlyoutMenu.ForeActive = Color.FromArgb(38, 38, 38);
+        _navigationFlyoutMenu.ForeColor = Color.FromArgb(38, 38, 38);
+        _navigationFlyoutMenu.Gap = 12;
+        _navigationFlyoutMenu.IconRatio = 1F;
+        _navigationFlyoutMenu.itemMargin = 2;
+        _navigationFlyoutMenu.Location = new Point(20, 20);
+        _navigationFlyoutMenu.Margin = new Padding(4, 4, 4, 4);
+        _navigationFlyoutMenu.Name = "_navigationFlyoutMenu";
+        _navigationFlyoutMenu.Padding = new Padding(6, 6, 6, 6);
+        _navigationFlyoutMenu.Radius = 5;
+        _navigationFlyoutMenu.Size = new Size(209, 143);
         _navigationFlyoutMenu.TabIndex = 0;
+        //
         // NavigationFlyoutControl
-        AutoScaleDimensions = new SizeF(96F, 96F);
+        //
+        AutoScaleDimensions = new SizeF(144F, 144F);
         AutoScaleMode = AutoScaleMode.Dpi;
         BackColor = Color.FromArgb(243, 243, 243);
         Controls.Add(_navigationFlyoutPanel);
-        Font = new Font("Microsoft YaHei UI", 10F);
+        Margin = new Padding(4, 4, 4, 4);
         Name = "NavigationFlyoutControl";
-        Size = new Size(166, 122);
+        Size = new Size(249, 183);
         _navigationFlyoutPanel.ResumeLayout(false);
         ResumeLayout(false);
     }

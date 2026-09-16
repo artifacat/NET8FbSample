@@ -74,346 +74,427 @@ partial class SettingsPage
     private void InitializeComponent()
     {
         _settingsStack = new AntdUI.StackPanel();
-        _settingsTitleLabel = new AntdUI.Label();
-        _basicSettingsLabel = new AntdUI.Label();
-        _messageSettingsLabel = new AntdUI.Label();
-        _basicSettingsPanel = new Controls.SettingsCardPanel();
-        _messageSettingsPanel = new Controls.SettingsCardPanel();
-        _animationRow = new AntdUI.Panel();
-        _shadowRow = new AntdUI.Panel();
-        _scrollbarRow = new AntdUI.Panel();
-        _showInWindowRow = new AntdUI.Panel();
+        _messageSettingsPanel = new FbSample.Views.Controls.SettingsCardPanel();
         _windowOffsetRow = new AntdUI.Panel();
-        _animationLabel = new AntdUI.Label();
-        _shadowLabel = new AntdUI.Label();
-        _scrollbarLabel = new AntdUI.Label();
-        _showInWindowLabel = new AntdUI.Label();
-        _windowOffsetLabel = new AntdUI.Label();
-        _showInWindowDescription = new AntdUI.Label();
-        _windowOffsetDescription = new AntdUI.Label();
-        _animationSwitch = new AntdUI.Switch();
-        _shadowSwitch = new AntdUI.Switch();
-        _scrollbarSwitch = new AntdUI.Switch();
-        _showInWindowSwitch = new AntdUI.Switch();
         _windowOffsetInput = new AntdUI.InputNumber();
-        _animationDivider = new AntdUI.Divider();
-        _shadowDivider = new AntdUI.Divider();
+        _windowOffsetDescription = new AntdUI.Label();
+        _windowOffsetLabel = new AntdUI.Label();
         _messageDivider = new AntdUI.Divider();
+        _showInWindowRow = new AntdUI.Panel();
+        _showInWindowSwitch = new AntdUI.Switch();
+        _showInWindowDescription = new AntdUI.Label();
+        _showInWindowLabel = new AntdUI.Label();
+        _messageSettingsLabel = new AntdUI.Label();
+        _basicSettingsPanel = new FbSample.Views.Controls.SettingsCardPanel();
+        _scrollbarRow = new AntdUI.Panel();
+        _scrollbarSwitch = new AntdUI.Switch();
+        _scrollbarLabel = new AntdUI.Label();
+        _shadowDivider = new AntdUI.Divider();
+        _shadowRow = new AntdUI.Panel();
+        _shadowSwitch = new AntdUI.Switch();
+        _shadowLabel = new AntdUI.Label();
+        _animationDivider = new AntdUI.Divider();
+        _animationRow = new AntdUI.Panel();
+        _animationSwitch = new AntdUI.Switch();
+        _animationLabel = new AntdUI.Label();
+        _basicSettingsLabel = new AntdUI.Label();
+        _settingsTitleLabel = new AntdUI.Label();
         _settingsStack.SuspendLayout();
-        _basicSettingsPanel.SuspendLayout();
         _messageSettingsPanel.SuspendLayout();
-        _animationRow.SuspendLayout();
-        _shadowRow.SuspendLayout();
-        _scrollbarRow.SuspendLayout();
-        _showInWindowRow.SuspendLayout();
         _windowOffsetRow.SuspendLayout();
+        _showInWindowRow.SuspendLayout();
+        _basicSettingsPanel.SuspendLayout();
+        _scrollbarRow.SuspendLayout();
+        _shadowRow.SuspendLayout();
+        _animationRow.SuspendLayout();
         SuspendLayout();
+        //
         // _settingsStack
-        _settingsStack.Name = "_settingsStack";
+        //
         _settingsStack.AutoScroll = true;
         _settingsStack.Back = Color.FromArgb(243, 243, 243);
         _settingsStack.BackColor = Color.FromArgb(243, 243, 243);
-        _settingsStack.Dock = DockStyle.Fill;
-        _settingsStack.Location = new Point(0, 0);
-        _settingsStack.Padding = new Padding(24);
-        _settingsStack.Size = new Size(966, 567);
-        _settingsStack.TabIndex = 0;
-        _settingsStack.Vertical = true;
-        // _settingsTitleLabel
-        _settingsTitleLabel.Name = "_settingsTitleLabel";
-        _settingsTitleLabel.AutoSizeMode = AntdUI.TAutoSize.Height;
-        _settingsTitleLabel.BackColor = Color.Transparent;
-        _settingsTitleLabel.Font = new Font("Microsoft YaHei UI", 16F, FontStyle.Bold);
-        _settingsTitleLabel.ForeColor = Color.FromArgb(38, 38, 38);
-        _settingsTitleLabel.LocalizationText = "Settings";
-        _settingsTitleLabel.Location = new Point(24, 24);
-        _settingsTitleLabel.Margin = new Padding(0, 0, 0, 20);
-        _settingsTitleLabel.MaximumSize = new Size(760, 0);
-        _settingsTitleLabel.Size = new Size(760, 32);
-        _settingsTitleLabel.TabStop = false;
-        _settingsTitleLabel.Text = "Settings";
-        // _basicSettingsLabel
-        _basicSettingsLabel.Name = "_basicSettingsLabel";
-        _basicSettingsLabel.AutoSizeMode = AntdUI.TAutoSize.Height;
-        _basicSettingsLabel.BackColor = Color.Transparent;
-        _basicSettingsLabel.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold);
-        _basicSettingsLabel.ForeColor = Color.FromArgb(38, 38, 38);
-        _basicSettingsLabel.LocalizationText = "BasicSettings";
-        _basicSettingsLabel.Location = new Point(24, 76);
-        _basicSettingsLabel.Margin = new Padding(0, 0, 0, 8);
-        _basicSettingsLabel.MaximumSize = new Size(760, 0);
-        _basicSettingsLabel.Size = new Size(760, 24);
-        _basicSettingsLabel.TabStop = false;
-        _basicSettingsLabel.Text = "Basic Settings";
-        // _messageSettingsLabel
-        _messageSettingsLabel.Name = "_messageSettingsLabel";
-        _messageSettingsLabel.AutoSizeMode = AntdUI.TAutoSize.Height;
-        _messageSettingsLabel.BackColor = Color.Transparent;
-        _messageSettingsLabel.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold);
-        _messageSettingsLabel.ForeColor = Color.FromArgb(38, 38, 38);
-        _messageSettingsLabel.LocalizationText = "MessageSettings";
-        _messageSettingsLabel.Location = new Point(24, 264);
-        _messageSettingsLabel.Margin = new Padding(0, 20, 0, 8);
-        _messageSettingsLabel.MaximumSize = new Size(760, 0);
-        _messageSettingsLabel.Size = new Size(760, 24);
-        _messageSettingsLabel.TabStop = false;
-        _messageSettingsLabel.Text = "Message configuration";
-        // _basicSettingsPanel
-        _basicSettingsPanel.Name = "_basicSettingsPanel";
-        _basicSettingsPanel.Back = Color.White;
-        _basicSettingsPanel.BackColor = Color.FromArgb(243, 243, 243);
-        _basicSettingsPanel.BorderColor = Color.FromArgb(225, 225, 225);
-        _basicSettingsPanel.BorderWidth = 1F;
-        _basicSettingsPanel.Location = new Point(24, 108);
-        _basicSettingsPanel.Margin = new Padding(0);
-        _basicSettingsPanel.MaximumSize = new Size(760, 0);
-        _basicSettingsPanel.Padding = new Padding(1);
-        _basicSettingsPanel.Radius = 10;
-        _basicSettingsPanel.Size = new Size(760, 136);
-        _basicSettingsPanel.TabIndex = 0;
-        // _messageSettingsPanel
-        _messageSettingsPanel.Name = "_messageSettingsPanel";
-        _messageSettingsPanel.Back = Color.White;
-        _messageSettingsPanel.BackColor = Color.FromArgb(243, 243, 243);
-        _messageSettingsPanel.BorderColor = Color.FromArgb(225, 225, 225);
-        _messageSettingsPanel.BorderWidth = 1F;
-        _messageSettingsPanel.Location = new Point(24, 296);
-        _messageSettingsPanel.Margin = new Padding(0);
-        _messageSettingsPanel.MaximumSize = new Size(760, 0);
-        _messageSettingsPanel.Padding = new Padding(1);
-        _messageSettingsPanel.Radius = 10;
-        _messageSettingsPanel.Size = new Size(760, 123);
-        _messageSettingsPanel.TabIndex = 1;
-        // _animationRow
-        _animationRow.Name = "_animationRow";
-        _animationRow.Back = Color.Transparent;
-        _animationRow.BackColor = Color.Transparent;
-        _animationRow.Dock = DockStyle.Top;
-        _animationRow.Location = new Point(1, 1);
-        _animationRow.Margin = new Padding(0);
-        _animationRow.Radius = 0;
-        _animationRow.Size = new Size(758, 44);
-        _animationRow.TabIndex = 0;
-        // _animationLabel
-        _animationLabel.Name = "_animationLabel";
-        _animationLabel.BackColor = Color.Transparent;
-        _animationLabel.ForeColor = Color.FromArgb(38, 38, 38);
-        _animationLabel.LocalizationText = "EnableAnimations";
-        _animationLabel.Location = new Point(18, 12);
-        _animationLabel.Size = new Size(646, 20);
-        _animationLabel.TabStop = false;
-        _animationLabel.Text = "Turn on animation";
-        // _animationSwitch
-        _animationSwitch.Name = "_animationSwitch";
-        _animationSwitch.AccessibleName = "Turn on animation";
-        _animationSwitch.Location = new Point(680, 9);
-        _animationSwitch.Size = new Size(60, 26);
-        _animationSwitch.TabIndex = 0;
-        _animationSwitch.WaveSize = 0;
-        _animationSwitch.Checked = true;
-        _animationSwitch.Enter += SettingControlEntered;
-        _animationRow.Controls.Add(_animationSwitch);
-        _animationRow.Controls.Add(_animationLabel);
-        // _shadowRow
-        _shadowRow.Name = "_shadowRow";
-        _shadowRow.Back = Color.Transparent;
-        _shadowRow.BackColor = Color.Transparent;
-        _shadowRow.Dock = DockStyle.Top;
-        _shadowRow.Location = new Point(1, 46);
-        _shadowRow.Margin = new Padding(0);
-        _shadowRow.Radius = 0;
-        _shadowRow.Size = new Size(758, 44);
-        _shadowRow.TabIndex = 1;
-        // _shadowLabel
-        _shadowLabel.Name = "_shadowLabel";
-        _shadowLabel.BackColor = Color.Transparent;
-        _shadowLabel.ForeColor = Color.FromArgb(38, 38, 38);
-        _shadowLabel.LocalizationText = "EnableShadows";
-        _shadowLabel.Location = new Point(18, 12);
-        _shadowLabel.Size = new Size(646, 20);
-        _shadowLabel.TabStop = false;
-        _shadowLabel.Text = "Enable shadow";
-        // _shadowSwitch
-        _shadowSwitch.Name = "_shadowSwitch";
-        _shadowSwitch.AccessibleName = "Enable shadow";
-        _shadowSwitch.Location = new Point(680, 9);
-        _shadowSwitch.Size = new Size(60, 26);
-        _shadowSwitch.TabIndex = 0;
-        _shadowSwitch.WaveSize = 0;
-        _shadowSwitch.Checked = true;
-        _shadowSwitch.Enter += SettingControlEntered;
-        _shadowRow.Controls.Add(_shadowSwitch);
-        _shadowRow.Controls.Add(_shadowLabel);
-        // _scrollbarRow
-        _scrollbarRow.Name = "_scrollbarRow";
-        _scrollbarRow.Back = Color.Transparent;
-        _scrollbarRow.BackColor = Color.Transparent;
-        _scrollbarRow.Dock = DockStyle.Top;
-        _scrollbarRow.Location = new Point(1, 91);
-        _scrollbarRow.Margin = new Padding(0);
-        _scrollbarRow.Radius = 0;
-        _scrollbarRow.Size = new Size(758, 44);
-        _scrollbarRow.TabIndex = 2;
-        // _scrollbarLabel
-        _scrollbarLabel.Name = "_scrollbarLabel";
-        _scrollbarLabel.BackColor = Color.Transparent;
-        _scrollbarLabel.ForeColor = Color.FromArgb(38, 38, 38);
-        _scrollbarLabel.LocalizationText = "HideScrollbars";
-        _scrollbarLabel.Location = new Point(18, 12);
-        _scrollbarLabel.Size = new Size(646, 20);
-        _scrollbarLabel.TabStop = false;
-        _scrollbarLabel.Text = "Hide scrollbar";
-        // _scrollbarSwitch
-        _scrollbarSwitch.Name = "_scrollbarSwitch";
-        _scrollbarSwitch.AccessibleName = "Hide scrollbar";
-        _scrollbarSwitch.Location = new Point(680, 9);
-        _scrollbarSwitch.Size = new Size(60, 26);
-        _scrollbarSwitch.TabIndex = 0;
-        _scrollbarSwitch.WaveSize = 0;
-        _scrollbarSwitch.Enter += SettingControlEntered;
-        _scrollbarRow.Controls.Add(_scrollbarSwitch);
-        _scrollbarRow.Controls.Add(_scrollbarLabel);
-        // _showInWindowRow
-        _showInWindowRow.Name = "_showInWindowRow";
-        _showInWindowRow.Back = Color.Transparent;
-        _showInWindowRow.BackColor = Color.Transparent;
-        _showInWindowRow.Dock = DockStyle.Top;
-        _showInWindowRow.Location = new Point(1, 1);
-        _showInWindowRow.Margin = new Padding(0);
-        _showInWindowRow.Radius = 0;
-        _showInWindowRow.Size = new Size(758, 60);
-        _showInWindowRow.TabIndex = 0;
-        // _showInWindowLabel
-        _showInWindowLabel.Name = "_showInWindowLabel";
-        _showInWindowLabel.BackColor = Color.Transparent;
-        _showInWindowLabel.ForeColor = Color.FromArgb(38, 38, 38);
-        _showInWindowLabel.LocalizationText = "ShowInWindow";
-        _showInWindowLabel.Location = new Point(18, 10);
-        _showInWindowLabel.Size = new Size(646, 20);
-        _showInWindowLabel.TabStop = false;
-        _showInWindowLabel.Text = "Show in window";
-        // _showInWindowDescription
-        _showInWindowDescription.Name = "_showInWindowDescription";
-        _showInWindowDescription.BackColor = Color.Transparent;
-        _showInWindowDescription.ForeColor = Color.FromArgb(112, 112, 112);
-        _showInWindowDescription.LocalizationText = "ShowInWindowDescription";
-        _showInWindowDescription.Location = new Point(18, 34);
-        _showInWindowDescription.Size = new Size(646, 18);
-        _showInWindowDescription.TabStop = false;
-        _showInWindowDescription.Text = "Show messages and notifications within the application window.";
-        _showInWindowDescription.TextAlign = ContentAlignment.TopLeft;
-        // _showInWindowSwitch
-        _showInWindowSwitch.Name = "_showInWindowSwitch";
-        _showInWindowSwitch.AccessibleName = "Show in window";
-        _showInWindowSwitch.Checked = true;
-        _showInWindowSwitch.Location = new Point(680, 17);
-        _showInWindowSwitch.Size = new Size(60, 26);
-        _showInWindowSwitch.TabIndex = 0;
-        _showInWindowSwitch.WaveSize = 0;
-        _showInWindowSwitch.Enter += SettingControlEntered;
-        _showInWindowRow.Controls.Add(_showInWindowSwitch);
-        _showInWindowRow.Controls.Add(_showInWindowDescription);
-        _showInWindowRow.Controls.Add(_showInWindowLabel);
-        // _windowOffsetRow
-        _windowOffsetRow.Name = "_windowOffsetRow";
-        _windowOffsetRow.Back = Color.Transparent;
-        _windowOffsetRow.BackColor = Color.Transparent;
-        _windowOffsetRow.Dock = DockStyle.Top;
-        _windowOffsetRow.Location = new Point(1, 62);
-        _windowOffsetRow.Margin = new Padding(0);
-        _windowOffsetRow.Radius = 0;
-        _windowOffsetRow.Size = new Size(758, 60);
-        _windowOffsetRow.TabIndex = 1;
-        // _windowOffsetLabel
-        _windowOffsetLabel.Name = "_windowOffsetLabel";
-        _windowOffsetLabel.BackColor = Color.Transparent;
-        _windowOffsetLabel.ForeColor = Color.FromArgb(38, 38, 38);
-        _windowOffsetLabel.LocalizationText = "WindowOffset";
-        _windowOffsetLabel.Location = new Point(18, 10);
-        _windowOffsetLabel.Size = new Size(646, 20);
-        _windowOffsetLabel.TabStop = false;
-        _windowOffsetLabel.Text = "WindowOffsetXY";
-        // _windowOffsetDescription
-        _windowOffsetDescription.Name = "_windowOffsetDescription";
-        _windowOffsetDescription.BackColor = Color.Transparent;
-        _windowOffsetDescription.ForeColor = Color.FromArgb(112, 112, 112);
-        _windowOffsetDescription.LocalizationText = "WindowOffsetDescription";
-        _windowOffsetDescription.Location = new Point(18, 34);
-        _windowOffsetDescription.Size = new Size(646, 18);
-        _windowOffsetDescription.TabStop = false;
-        _windowOffsetDescription.Text = "Adjust the spacing between popups and the placement boundary.";
-        _windowOffsetDescription.TextAlign = ContentAlignment.TopLeft;
-        // _windowOffsetInput
-        _windowOffsetInput.Name = "_windowOffsetInput";
-        _windowOffsetInput.AccessibleName = "WindowOffsetXY";
-        _windowOffsetInput.Location = new Point(680, 17);
-        _windowOffsetInput.Size = new Size(60, 26);
-        _windowOffsetInput.TabIndex = 0;
-        _windowOffsetInput.WaveSize = 0;
-        _windowOffsetInput.Text = "0";
-        _windowOffsetInput.Enter += SettingControlEntered;
-        _windowOffsetRow.Controls.Add(_windowOffsetInput);
-        _windowOffsetRow.Controls.Add(_windowOffsetDescription);
-        _windowOffsetRow.Controls.Add(_windowOffsetLabel);
-        // _animationDivider
-        _animationDivider.Name = "_animationDivider";
-        _animationDivider.BackColor = Color.Transparent;
-        _animationDivider.Dock = DockStyle.Top;
-        _animationDivider.ForeColor = Color.FromArgb(225, 225, 225);
-        _animationDivider.Location = new Point(1, 45);
-        _animationDivider.Margin = new Padding(18, 0, 18, 0);
-        _animationDivider.Size = new Size(758, 1);
-        _animationDivider.TabStop = false;
-        _animationDivider.Thickness = 1F;
-        // _shadowDivider
-        _shadowDivider.Name = "_shadowDivider";
-        _shadowDivider.BackColor = Color.Transparent;
-        _shadowDivider.Dock = DockStyle.Top;
-        _shadowDivider.ForeColor = Color.FromArgb(225, 225, 225);
-        _shadowDivider.Location = new Point(1, 90);
-        _shadowDivider.Margin = new Padding(18, 0, 18, 0);
-        _shadowDivider.Size = new Size(758, 1);
-        _shadowDivider.TabStop = false;
-        _shadowDivider.Thickness = 1F;
-        // _messageDivider
-        _messageDivider.Name = "_messageDivider";
-        _messageDivider.BackColor = Color.Transparent;
-        _messageDivider.Dock = DockStyle.Top;
-        _messageDivider.ForeColor = Color.FromArgb(225, 225, 225);
-        _messageDivider.Location = new Point(1, 61);
-        _messageDivider.Margin = new Padding(18, 0, 18, 0);
-        _messageDivider.Size = new Size(758, 1);
-        _messageDivider.TabStop = false;
-        _messageDivider.Thickness = 1F;
-        _basicSettingsPanel.Controls.Add(_scrollbarRow);
-        _basicSettingsPanel.Controls.Add(_shadowDivider);
-        _basicSettingsPanel.Controls.Add(_shadowRow);
-        _basicSettingsPanel.Controls.Add(_animationDivider);
-        _basicSettingsPanel.Controls.Add(_animationRow);
-        _messageSettingsPanel.Controls.Add(_windowOffsetRow);
-        _messageSettingsPanel.Controls.Add(_messageDivider);
-        _messageSettingsPanel.Controls.Add(_showInWindowRow);
         _settingsStack.Controls.Add(_messageSettingsPanel);
         _settingsStack.Controls.Add(_messageSettingsLabel);
         _settingsStack.Controls.Add(_basicSettingsPanel);
         _settingsStack.Controls.Add(_basicSettingsLabel);
         _settingsStack.Controls.Add(_settingsTitleLabel);
+        _settingsStack.Dock = DockStyle.Fill;
+        _settingsStack.Location = new Point(0, 0);
+        _settingsStack.Margin = new Padding(4, 4, 4, 4);
+        _settingsStack.Name = "_settingsStack";
+        _settingsStack.Padding = new Padding(36, 36, 36, 36);
+        _settingsStack.Size = new Size(1449, 850);
+        _settingsStack.TabIndex = 0;
+        _settingsStack.Vertical = true;
+        //
+        // _messageSettingsPanel
+        //
+        _messageSettingsPanel.Back = Color.White;
+        _messageSettingsPanel.BackColor = Color.FromArgb(243, 243, 243);
+        _messageSettingsPanel.BorderColor = Color.FromArgb(225, 225, 225);
+        _messageSettingsPanel.BorderWidth = 1F;
+        _messageSettingsPanel.Controls.Add(_windowOffsetRow);
+        _messageSettingsPanel.Controls.Add(_messageDivider);
+        _messageSettingsPanel.Controls.Add(_showInWindowRow);
+        _messageSettingsPanel.Location = new Point(36, 417);
+        _messageSettingsPanel.Margin = new Padding(0);
+        _messageSettingsPanel.MaximumSize = new Size(1140, 0);
+        _messageSettingsPanel.Name = "_messageSettingsPanel";
+        _messageSettingsPanel.Padding = new Padding(2, 2, 2, 2);
+        _messageSettingsPanel.Radius = 10;
+        _messageSettingsPanel.Size = new Size(1140, 184);
+        _messageSettingsPanel.TabIndex = 1;
+        //
+        // _windowOffsetRow
+        //
+        _windowOffsetRow.Back = Color.Transparent;
+        _windowOffsetRow.BackColor = Color.Transparent;
+        _windowOffsetRow.Controls.Add(_windowOffsetInput);
+        _windowOffsetRow.Controls.Add(_windowOffsetDescription);
+        _windowOffsetRow.Controls.Add(_windowOffsetLabel);
+        _windowOffsetRow.Dock = DockStyle.Top;
+        _windowOffsetRow.Location = new Point(4, 96);
+        _windowOffsetRow.Margin = new Padding(0);
+        _windowOffsetRow.Name = "_windowOffsetRow";
+        _windowOffsetRow.Radius = 0;
+        _windowOffsetRow.Size = new Size(1132, 90);
+        _windowOffsetRow.TabIndex = 1;
+        //
+        // _windowOffsetInput
+        //
+        _windowOffsetInput.AccessibleName = "WindowOffsetXY";
+        _windowOffsetInput.Location = new Point(1020, 26);
+        _windowOffsetInput.Margin = new Padding(4, 4, 4, 4);
+        _windowOffsetInput.Name = "_windowOffsetInput";
+        _windowOffsetInput.Size = new Size(90, 39);
+        _windowOffsetInput.TabIndex = 0;
+        _windowOffsetInput.Text = "0";
+        _windowOffsetInput.WaveSize = 0;
+        _windowOffsetInput.Enter += SettingControlEntered;
+        //
+        // _windowOffsetDescription
+        //
+        _windowOffsetDescription.BackColor = Color.Transparent;
+        _windowOffsetDescription.ForeColor = Color.FromArgb(112, 112, 112);
+        _windowOffsetDescription.LocalizationText = "WindowOffsetDescription";
+        _windowOffsetDescription.Location = new Point(27, 51);
+        _windowOffsetDescription.Margin = new Padding(4, 4, 4, 4);
+        _windowOffsetDescription.Name = "_windowOffsetDescription";
+        _windowOffsetDescription.Size = new Size(969, 27);
+        _windowOffsetDescription.TabIndex = 1;
+        _windowOffsetDescription.TabStop = false;
+        _windowOffsetDescription.Text = "Adjust the spacing between popups and the placement boundary.";
+        _windowOffsetDescription.TextAlign = ContentAlignment.TopLeft;
+        //
+        // _windowOffsetLabel
+        //
+        _windowOffsetLabel.BackColor = Color.Transparent;
+        _windowOffsetLabel.ForeColor = Color.FromArgb(38, 38, 38);
+        _windowOffsetLabel.LocalizationText = "WindowOffset";
+        _windowOffsetLabel.Location = new Point(27, 15);
+        _windowOffsetLabel.Margin = new Padding(4, 4, 4, 4);
+        _windowOffsetLabel.Name = "_windowOffsetLabel";
+        _windowOffsetLabel.Size = new Size(969, 30);
+        _windowOffsetLabel.TabIndex = 2;
+        _windowOffsetLabel.TabStop = false;
+        _windowOffsetLabel.Text = "WindowOffsetXY";
+        //
+        // _messageDivider
+        //
+        _messageDivider.BackColor = Color.Transparent;
+        _messageDivider.Dock = DockStyle.Top;
+        _messageDivider.ForeColor = Color.FromArgb(225, 225, 225);
+        _messageDivider.Location = new Point(4, 94);
+        _messageDivider.Margin = new Padding(27, 0, 27, 0);
+        _messageDivider.Name = "_messageDivider";
+        _messageDivider.Size = new Size(1132, 2);
+        _messageDivider.TabIndex = 2;
+        _messageDivider.TabStop = false;
+        _messageDivider.Thickness = 1F;
+        //
+        // _showInWindowRow
+        //
+        _showInWindowRow.Back = Color.Transparent;
+        _showInWindowRow.BackColor = Color.Transparent;
+        _showInWindowRow.Controls.Add(_showInWindowSwitch);
+        _showInWindowRow.Controls.Add(_showInWindowDescription);
+        _showInWindowRow.Controls.Add(_showInWindowLabel);
+        _showInWindowRow.Dock = DockStyle.Top;
+        _showInWindowRow.Location = new Point(4, 4);
+        _showInWindowRow.Margin = new Padding(0);
+        _showInWindowRow.Name = "_showInWindowRow";
+        _showInWindowRow.Radius = 0;
+        _showInWindowRow.Size = new Size(1132, 90);
+        _showInWindowRow.TabIndex = 0;
+        //
+        // _showInWindowSwitch
+        //
+        _showInWindowSwitch.AccessibleName = "Show in window";
+        _showInWindowSwitch.Checked = true;
+        _showInWindowSwitch.Location = new Point(1020, 26);
+        _showInWindowSwitch.Margin = new Padding(4, 4, 4, 4);
+        _showInWindowSwitch.Name = "_showInWindowSwitch";
+        _showInWindowSwitch.Size = new Size(90, 39);
+        _showInWindowSwitch.TabIndex = 0;
+        _showInWindowSwitch.WaveSize = 0;
+        _showInWindowSwitch.Enter += SettingControlEntered;
+        //
+        // _showInWindowDescription
+        //
+        _showInWindowDescription.BackColor = Color.Transparent;
+        _showInWindowDescription.ForeColor = Color.FromArgb(112, 112, 112);
+        _showInWindowDescription.LocalizationText = "ShowInWindowDescription";
+        _showInWindowDescription.Location = new Point(27, 51);
+        _showInWindowDescription.Margin = new Padding(4, 4, 4, 4);
+        _showInWindowDescription.Name = "_showInWindowDescription";
+        _showInWindowDescription.Size = new Size(969, 27);
+        _showInWindowDescription.TabIndex = 1;
+        _showInWindowDescription.TabStop = false;
+        _showInWindowDescription.Text = "Show messages and notifications within the application window.";
+        _showInWindowDescription.TextAlign = ContentAlignment.TopLeft;
+        //
+        // _showInWindowLabel
+        //
+        _showInWindowLabel.BackColor = Color.Transparent;
+        _showInWindowLabel.ForeColor = Color.FromArgb(38, 38, 38);
+        _showInWindowLabel.LocalizationText = "ShowInWindow";
+        _showInWindowLabel.Location = new Point(27, 15);
+        _showInWindowLabel.Margin = new Padding(4, 4, 4, 4);
+        _showInWindowLabel.Name = "_showInWindowLabel";
+        _showInWindowLabel.Size = new Size(969, 30);
+        _showInWindowLabel.TabIndex = 2;
+        _showInWindowLabel.TabStop = false;
+        _showInWindowLabel.Text = "Show in window";
+        //
+        // _messageSettingsLabel
+        //
+        _messageSettingsLabel.AutoSizeMode = AntdUI.TAutoSize.Height;
+        _messageSettingsLabel.BackColor = Color.Transparent;
+        _messageSettingsLabel.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold);
+        _messageSettingsLabel.ForeColor = Color.FromArgb(38, 38, 38);
+        _messageSettingsLabel.LocalizationText = "MessageSettings";
+        _messageSettingsLabel.Location = new Point(36, 379);
+        _messageSettingsLabel.Margin = new Padding(0, 30, 0, 12);
+        _messageSettingsLabel.MaximumSize = new Size(1140, 0);
+        _messageSettingsLabel.Name = "_messageSettingsLabel";
+        _messageSettingsLabel.Size = new Size(1140, 26);
+        _messageSettingsLabel.TabIndex = 2;
+        _messageSettingsLabel.TabStop = false;
+        _messageSettingsLabel.Text = "Message configuration";
+        //
+        // _basicSettingsPanel
+        //
+        _basicSettingsPanel.Back = Color.White;
+        _basicSettingsPanel.BackColor = Color.FromArgb(243, 243, 243);
+        _basicSettingsPanel.BorderColor = Color.FromArgb(225, 225, 225);
+        _basicSettingsPanel.BorderWidth = 1F;
+        _basicSettingsPanel.Controls.Add(_scrollbarRow);
+        _basicSettingsPanel.Controls.Add(_shadowDivider);
+        _basicSettingsPanel.Controls.Add(_shadowRow);
+        _basicSettingsPanel.Controls.Add(_animationDivider);
+        _basicSettingsPanel.Controls.Add(_animationRow);
+        _basicSettingsPanel.Location = new Point(36, 145);
+        _basicSettingsPanel.Margin = new Padding(0);
+        _basicSettingsPanel.MaximumSize = new Size(1140, 0);
+        _basicSettingsPanel.Name = "_basicSettingsPanel";
+        _basicSettingsPanel.Padding = new Padding(2, 2, 2, 2);
+        _basicSettingsPanel.Radius = 10;
+        _basicSettingsPanel.Size = new Size(1140, 204);
+        _basicSettingsPanel.TabIndex = 0;
+        //
+        // _scrollbarRow
+        //
+        _scrollbarRow.Back = Color.Transparent;
+        _scrollbarRow.BackColor = Color.Transparent;
+        _scrollbarRow.Controls.Add(_scrollbarSwitch);
+        _scrollbarRow.Controls.Add(_scrollbarLabel);
+        _scrollbarRow.Dock = DockStyle.Top;
+        _scrollbarRow.Location = new Point(4, 140);
+        _scrollbarRow.Margin = new Padding(0);
+        _scrollbarRow.Name = "_scrollbarRow";
+        _scrollbarRow.Radius = 0;
+        _scrollbarRow.Size = new Size(1132, 66);
+        _scrollbarRow.TabIndex = 2;
+        //
+        // _scrollbarSwitch
+        //
+        _scrollbarSwitch.AccessibleName = "Hide scrollbar";
+        _scrollbarSwitch.Location = new Point(1020, 14);
+        _scrollbarSwitch.Margin = new Padding(4, 4, 4, 4);
+        _scrollbarSwitch.Name = "_scrollbarSwitch";
+        _scrollbarSwitch.Size = new Size(90, 39);
+        _scrollbarSwitch.TabIndex = 0;
+        _scrollbarSwitch.WaveSize = 0;
+        _scrollbarSwitch.Enter += SettingControlEntered;
+        //
+        // _scrollbarLabel
+        //
+        _scrollbarLabel.BackColor = Color.Transparent;
+        _scrollbarLabel.ForeColor = Color.FromArgb(38, 38, 38);
+        _scrollbarLabel.LocalizationText = "HideScrollbars";
+        _scrollbarLabel.Location = new Point(27, 18);
+        _scrollbarLabel.Margin = new Padding(4, 4, 4, 4);
+        _scrollbarLabel.Name = "_scrollbarLabel";
+        _scrollbarLabel.Size = new Size(969, 30);
+        _scrollbarLabel.TabIndex = 1;
+        _scrollbarLabel.TabStop = false;
+        _scrollbarLabel.Text = "Hide scrollbar";
+        //
+        // _shadowDivider
+        //
+        _shadowDivider.BackColor = Color.Transparent;
+        _shadowDivider.Dock = DockStyle.Top;
+        _shadowDivider.ForeColor = Color.FromArgb(225, 225, 225);
+        _shadowDivider.Location = new Point(4, 138);
+        _shadowDivider.Margin = new Padding(27, 0, 27, 0);
+        _shadowDivider.Name = "_shadowDivider";
+        _shadowDivider.Size = new Size(1132, 2);
+        _shadowDivider.TabIndex = 3;
+        _shadowDivider.TabStop = false;
+        _shadowDivider.Thickness = 1F;
+        //
+        // _shadowRow
+        //
+        _shadowRow.Back = Color.Transparent;
+        _shadowRow.BackColor = Color.Transparent;
+        _shadowRow.Controls.Add(_shadowSwitch);
+        _shadowRow.Controls.Add(_shadowLabel);
+        _shadowRow.Dock = DockStyle.Top;
+        _shadowRow.Location = new Point(4, 72);
+        _shadowRow.Margin = new Padding(0);
+        _shadowRow.Name = "_shadowRow";
+        _shadowRow.Radius = 0;
+        _shadowRow.Size = new Size(1132, 66);
+        _shadowRow.TabIndex = 1;
+        //
+        // _shadowSwitch
+        //
+        _shadowSwitch.AccessibleName = "Enable shadow";
+        _shadowSwitch.Checked = true;
+        _shadowSwitch.Location = new Point(1020, 14);
+        _shadowSwitch.Margin = new Padding(4, 4, 4, 4);
+        _shadowSwitch.Name = "_shadowSwitch";
+        _shadowSwitch.Size = new Size(90, 39);
+        _shadowSwitch.TabIndex = 0;
+        _shadowSwitch.WaveSize = 0;
+        _shadowSwitch.Enter += SettingControlEntered;
+        //
+        // _shadowLabel
+        //
+        _shadowLabel.BackColor = Color.Transparent;
+        _shadowLabel.ForeColor = Color.FromArgb(38, 38, 38);
+        _shadowLabel.LocalizationText = "EnableShadows";
+        _shadowLabel.Location = new Point(27, 18);
+        _shadowLabel.Margin = new Padding(4, 4, 4, 4);
+        _shadowLabel.Name = "_shadowLabel";
+        _shadowLabel.Size = new Size(969, 30);
+        _shadowLabel.TabIndex = 1;
+        _shadowLabel.TabStop = false;
+        _shadowLabel.Text = "Enable shadow";
+        //
+        // _animationDivider
+        //
+        _animationDivider.BackColor = Color.Transparent;
+        _animationDivider.Dock = DockStyle.Top;
+        _animationDivider.ForeColor = Color.FromArgb(225, 225, 225);
+        _animationDivider.Location = new Point(4, 70);
+        _animationDivider.Margin = new Padding(27, 0, 27, 0);
+        _animationDivider.Name = "_animationDivider";
+        _animationDivider.Size = new Size(1132, 2);
+        _animationDivider.TabIndex = 4;
+        _animationDivider.TabStop = false;
+        _animationDivider.Thickness = 1F;
+        //
+        // _animationRow
+        //
+        _animationRow.Back = Color.Transparent;
+        _animationRow.BackColor = Color.Transparent;
+        _animationRow.Controls.Add(_animationSwitch);
+        _animationRow.Controls.Add(_animationLabel);
+        _animationRow.Dock = DockStyle.Top;
+        _animationRow.Location = new Point(4, 4);
+        _animationRow.Margin = new Padding(0);
+        _animationRow.Name = "_animationRow";
+        _animationRow.Radius = 0;
+        _animationRow.Size = new Size(1132, 66);
+        _animationRow.TabIndex = 0;
+        //
+        // _animationSwitch
+        //
+        _animationSwitch.AccessibleName = "Turn on animation";
+        _animationSwitch.Checked = true;
+        _animationSwitch.Location = new Point(1020, 14);
+        _animationSwitch.Margin = new Padding(4, 4, 4, 4);
+        _animationSwitch.Name = "_animationSwitch";
+        _animationSwitch.Size = new Size(90, 39);
+        _animationSwitch.TabIndex = 0;
+        _animationSwitch.WaveSize = 0;
+        _animationSwitch.Enter += SettingControlEntered;
+        //
+        // _animationLabel
+        //
+        _animationLabel.BackColor = Color.Transparent;
+        _animationLabel.ForeColor = Color.FromArgb(38, 38, 38);
+        _animationLabel.LocalizationText = "EnableAnimations";
+        _animationLabel.Location = new Point(27, 18);
+        _animationLabel.Margin = new Padding(4, 4, 4, 4);
+        _animationLabel.Name = "_animationLabel";
+        _animationLabel.Size = new Size(969, 30);
+        _animationLabel.TabIndex = 1;
+        _animationLabel.TabStop = false;
+        _animationLabel.Text = "Turn on animation";
+        //
+        // _basicSettingsLabel
+        //
+        _basicSettingsLabel.AutoSizeMode = AntdUI.TAutoSize.Height;
+        _basicSettingsLabel.BackColor = Color.Transparent;
+        _basicSettingsLabel.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold);
+        _basicSettingsLabel.ForeColor = Color.FromArgb(38, 38, 38);
+        _basicSettingsLabel.LocalizationText = "BasicSettings";
+        _basicSettingsLabel.Location = new Point(36, 107);
+        _basicSettingsLabel.Margin = new Padding(0, 0, 0, 12);
+        _basicSettingsLabel.MaximumSize = new Size(1140, 0);
+        _basicSettingsLabel.Name = "_basicSettingsLabel";
+        _basicSettingsLabel.Size = new Size(1140, 26);
+        _basicSettingsLabel.TabIndex = 3;
+        _basicSettingsLabel.TabStop = false;
+        _basicSettingsLabel.Text = "Basic Settings";
+        //
+        // _settingsTitleLabel
+        //
+        _settingsTitleLabel.AutoSizeMode = AntdUI.TAutoSize.Height;
+        _settingsTitleLabel.BackColor = Color.Transparent;
+        _settingsTitleLabel.Font = new Font("Microsoft YaHei UI", 16F, FontStyle.Bold);
+        _settingsTitleLabel.ForeColor = Color.FromArgb(38, 38, 38);
+        _settingsTitleLabel.LocalizationText = "Settings";
+        _settingsTitleLabel.Location = new Point(36, 36);
+        _settingsTitleLabel.Margin = new Padding(0, 0, 0, 30);
+        _settingsTitleLabel.MaximumSize = new Size(1140, 0);
+        _settingsTitleLabel.Name = "_settingsTitleLabel";
+        _settingsTitleLabel.Size = new Size(1140, 41);
+        _settingsTitleLabel.TabIndex = 4;
+        _settingsTitleLabel.TabStop = false;
+        _settingsTitleLabel.Text = "Settings";
+        //
         // SettingsPage
-        AutoScaleDimensions = new SizeF(96F, 96F);
+        //
+        AutoScaleDimensions = new SizeF(144F, 144F);
         AutoScaleMode = AutoScaleMode.Dpi;
         BackColor = Color.FromArgb(243, 243, 243);
-        Font = new Font("Microsoft YaHei UI", 10F);
         Controls.Add(_settingsStack);
+        Margin = new Padding(4, 4, 4, 4);
         Name = "SettingsPage";
-        Size = new Size(966, 567);
+        Size = new Size(1449, 850);
         _settingsStack.ResumeLayout(false);
-        _basicSettingsPanel.ResumeLayout(false);
+        _settingsStack.PerformLayout();
         _messageSettingsPanel.ResumeLayout(false);
-        _animationRow.ResumeLayout(false);
-        _shadowRow.ResumeLayout(false);
-        _scrollbarRow.ResumeLayout(false);
-        _showInWindowRow.ResumeLayout(false);
         _windowOffsetRow.ResumeLayout(false);
+        _showInWindowRow.ResumeLayout(false);
+        _basicSettingsPanel.ResumeLayout(false);
+        _scrollbarRow.ResumeLayout(false);
+        _shadowRow.ResumeLayout(false);
+        _animationRow.ResumeLayout(false);
         ResumeLayout(false);
     }
 }
