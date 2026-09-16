@@ -7,5 +7,6 @@ artifacts/
 *.user
 *.suo
 /AGENTS.md
+/编码规范/
 /csharp14-dotnet10-team-coding-standards.md
 /state-machine-coding-standard.md
